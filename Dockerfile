@@ -1,8 +1,9 @@
-FROM ocramz/petsc-docker
+# FROM ocramz/petsc-docker
+FROM alpine:3.1
 
 
 # # Update APT
-RUN apt-get update
+# RUN apt-get update
 
 # # Set up environment variables
 ENV LOCAL_DIR $HOME/.local
@@ -25,6 +26,9 @@ ENV SLEPC_LIB $SLEPC_DIR/$SLEPC_ARCH/lib/
 RUN mkdir -p $LOCAL_DIR
 RUN mkdir -p $BIN_DIR
 RUN mkdir -p $SRC_DIR
+
+RUN echo $SLEPC_DIR
+RUN echo $SLEPC_ARCH
 
 RUN echo $PETSC_LIB
 RUN echo $SLEPC_LIB
