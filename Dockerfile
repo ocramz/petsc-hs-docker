@@ -28,7 +28,7 @@ RUN mkdir -p $SRC_DIR
 
 
 # # Get build tools
-RUN apt-get install -y --no-install-recommends make gcc git libgmp-dev wget curl xz
+RUN apt-get install -y --no-install-recommends make gcc git libgmp-dev wget curl xz-utils
 
 # # Get `stack`
 RUN echo $SSEP
