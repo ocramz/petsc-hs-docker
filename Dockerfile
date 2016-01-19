@@ -26,21 +26,23 @@ RUN mkdir -p $LOCAL_DIR
 RUN mkdir -p $BIN_DIR
 RUN mkdir -p $SRC_DIR
 
+RUN echo $PETSC_LIB
+RUN echo $SLEPC_LIB
 
-# # Get build tools
-RUN apt-get install -y --no-install-recommends make gcc git libgmp-dev wget curl xz-utils
+# # # Get build tools
+# RUN apt-get install -y --no-install-recommends make gcc git libgmp-dev wget curl xz-utils
 
-# # Get `stack`
-RUN echo $SSEP
-WORKDIR $BIN_DIR
-RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
-RUN ls -lsA
+# # # Get `stack`
+# RUN echo $SSEP
+# WORKDIR $BIN_DIR
+# RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
+# RUN ls -lsA
 
-# # Add `stack` path
-ENV PATH $(stack --stack-yaml stack.yaml path --local-install-root):$PATH
+# # # Add `stack` path
+# ENV PATH $(stack --stack-yaml stack.yaml path --local-install-root):$PATH
 
-# # fetch and make `petsc-hs`
-WORKDIR $SRC_DIR
-RUN git clone https://github.com/ocramz/petsc-hs.git
-WORKDIR $PETSCHS_DIR
-RUN stack build $STACK_ARGS --no-terminal --install-ghc --extra-include-dirs=$PETSC_INCLUDE1 --extra-include-dirs=$PETSC_INCLUDE2 --extra-include-dirs=$SLEPC_INCLUDE1 --extra-include-dirs=$SLEPC_INCLUDE2 --extra-lib-dirs=$PETSC_LIB --extra-lib-dirs=$SLEPC_LIB
+# # # fetch and make `petsc-hs`
+# WORKDIR $SRC_DIR
+# RUN git clone https://github.com/ocramz/petsc-hs.git
+# WORKDIR $PETSCHS_DIR
+# RUN stack build $STACK_ARGS --no-terminal --install-ghc --extra-include-dirs=$PETSC_INCLUDE1 --extra-include-dirs=$PETSC_INCLUDE2 --extra-include-dirs=$SLEPC_INCLUDE1 --extra-include-dirs=$SLEPC_INCLUDE2 --extra-lib-dirs=$PETSC_LIB --extra-lib-dirs=$SLEPC_LIB
