@@ -10,7 +10,7 @@ ENV BIN_DIR $HOME/.local/bin
 ENV SRC_DIR $HOME/src
 ENV PETSCHS_DIR $SRC_DIR/petsc-hs
 
-ENV PATH=$BIN_DIR:$PATH
+ENV PATH $BIN_DIR:$PATH
 
 ENV PETSC_INCLUDE1 $PETSC_DIR/include/
 ENV PETSC_INCLUDE2 $PETSC_DIR/$PETSC_ARCH/include/
@@ -37,7 +37,7 @@ RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --s
 RUN ls -lsA
 
 # # Add `stack` path
-ENV PATH=$(stack --stack-yaml stack.yaml path --local-install-root):$PATH
+ENV PATH $(stack --stack-yaml stack.yaml path --local-install-root):$PATH
 
 # # fetch and make `petsc-hs`
 WORKDIR $SRC_DIR
