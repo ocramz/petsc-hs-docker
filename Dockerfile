@@ -1,6 +1,4 @@
-# FROM ocramz/petsc-docker
-FROM alpine:3.1
-
+FROM ocramz/petsc-docker
 
 # # Update APT
 # RUN apt-get update
@@ -37,7 +35,6 @@ RUN echo $SLEPC_LIB
 # RUN apt-get install -y --no-install-recommends make gcc git libgmp-dev wget curl xz-utils
 
 # # # Get `stack`
-# RUN echo $SSEP
 # WORKDIR $BIN_DIR
 # RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
 # RUN ls -lsA
