@@ -3,6 +3,10 @@ FROM ocramz/petsc-docker
 # # Update APT
 RUN apt-get update
 
+# # TLS-related
+RUN apt-get install debian-keyring debian-archive-keyring
+RUN apt-key update
+
 # # Set up environment variables
 ENV LOCAL_DIR $HOME/.local
 ENV BIN_DIR $HOME/.local/bin
