@@ -1,0 +1,15 @@
+sudo: 
+  false
+
+language: 
+  c 
+
+services:
+  - docker
+
+before_install:
+  - export ACCOUNT=ocramz
+
+
+script:
+  - make build ACCOUNTNAME=$ACCOUNT
