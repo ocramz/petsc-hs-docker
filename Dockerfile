@@ -2,7 +2,6 @@ FROM ocramz/petsc-docker
 
 
 # # Update APT
-RUN echo '=============================================================='
 RUN apt-get update
 
 # # Set up environment variables
@@ -23,26 +22,24 @@ ENV SLEPC_LIB $SLEPC_DIR/$SLEPC_ARCH/lib/
 
 
 # # Create directories
-RUN echo '=============================================================='
 RUN mkdir -p $LOCAL_DIR
 RUN mkdir -p $BIN_DIR
 RUN mkdir -p $SRC_DIR
 
 
 # # Get build tools
-RUN echo '=============================================================='
 RUN apt-get install -y --no-install-recommends make gcc git libgmp-dev wget curl
 
 # # Get `stack`
 RUN echo $SSEP
 WORKDIR $BIN_DIR
 RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
+RUN ls -lsA
 
 # # Add `stack` path
 RUN export PATH=$(stack --stack-yaml stack.yaml path --local-install-root):$PATH
 
 # # fetch and make `petsc-hs`
-RUN echo '=============================================================='
 WORKDIR $SRC_DIR
 RUN git clone https://github.com/ocramz/petsc-hs.git
 WORKDIR $PETSCHS_DIR
