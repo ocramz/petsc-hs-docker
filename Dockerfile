@@ -65,5 +65,6 @@ RUN stack build $STACK_ARGS --no-terminal --install-ghc --extra-include-dirs=$PE
 # # run example function
 RUN stack exec petsc-example
 
-ENV PATH "$PETSC_DIR"/"$PETSC_ARCH"/bin/:$PATH
-RUN mpirun -n 2 ./"$DIST_DIR"/petsc-example/petsc-example
+# # ", using mpirun
+ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
+RUN mpirun -n 2 petsc-example
