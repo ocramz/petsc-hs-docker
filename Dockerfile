@@ -60,6 +60,7 @@ RUN git clone https://github.com/ocramz/petsc-hs.git
 WORKDIR $PETSCHS_DIR
 RUN stack build $STACK_ARGS --no-terminal --install-ghc --extra-include-dirs=$PETSC_INCLUDE1 --extra-include-dirs=$PETSC_INCLUDE2 --extra-include-dirs=$SLEPC_INCLUDE1 --extra-include-dirs=$SLEPC_INCLUDE2 --extra-lib-dirs=$PETSC_LIB --extra-lib-dirs=$SLEPC_LIB
 
+ENV DIST_DIR $(stack path --dist-dir)/build
 
 
 # # run example function
@@ -67,4 +68,4 @@ RUN stack exec petsc-example
 
 # # ", using mpirun
 ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
-RUN mpirun -n 2 petsc-example
+RUN mpirun -n 2 $DIST_DIR/petsc-example/petsc-example
