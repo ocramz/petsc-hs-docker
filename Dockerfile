@@ -1,10 +1,21 @@
 FROM ocramz/petsc-docker
 
 # # Update APT
-RUN apt-get update
+RUN apt-get update -yq --fix-missing && apt-get upgrade -y
 
-# # TLS-related
-RUN apt-get install -y --no-install-recommends ca-certificates debian-keyring debian-archive-keyring && \
+
+# # RUN sudo apt-get install -f &&
+# RUN apt-get update -yq --fix-missing && apt-get upgrade -y
+# RUN sudo apt-get install software-properties-common
+# RUN sudo add-apt-repository main && \
+#     sudo add-apt-repository universe && \
+#     sudo add-apt-repository restricted && \
+#     sudo add-apt-repository multiverse
+    
+
+
+# TLS-related
+RUN apt-get install -y --no-install-recommends ca-certificates && \
     apt-key update
 
 
@@ -46,7 +57,7 @@ RUN echo $PKG_CONFIG_PATH
 
 
 # # Get build tools
-RUN apt-get install -y --no-install-recommends make gcc git libgmp-dev wget curl xz-utils
+RUN apt-get install -yq make gcc git libgmp-dev wget curl xz-utils
 
 
 
