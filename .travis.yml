@@ -9,8 +9,8 @@ services:
   - docker
 
 before_install:
-  - export ACCOUNT=ocramz
+  - export ACC=ocramz
 
 
 script:
-  - make build ACCOUNTNAME=$ACCOUNT
+  - make build ACCOUNT=$ACC
