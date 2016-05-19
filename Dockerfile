@@ -34,25 +34,31 @@ RUN mkdir -p $BIN_DIR
 RUN mkdir -p $SRC_DIR
 
 # # print PETSc/SLEPc env variables to stdout:
-RUN echo $PETSC_DIR && \
-    echo $PETSC_ARCH && \
-    echo $SLEPC_DIR && \
-    echo $SLEPC_ARCH && \
-    echo $PETSC_LIB && \
-    echo $SLEPC_LIB && \
-    echo $LD_LIBRARY_PATH && \
-    echo $PKG_CONFIG_PATH
+RUN echo $PETSC_DIR 
+RUN echo $PETSC_ARCH 
+RUN echo $SLEPC_DIR 
+RUN echo $SLEPC_ARCH 
+RUN echo $PETSC_LIB 
+RUN echo $SLEPC_LIB 
+RUN echo $LD_LIBRARY_PATH 
+RUN echo $PKG_CONFIG_PATH
+
+
 
 # # Get build tools
 RUN apt-get install -y --no-install-recommends make gcc git libgmp-dev wget curl xz-utils
 
+
+
 # # Get `stack`
 WORKDIR $BIN_DIR
-# RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
+
 RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
 
 # # Add `stack` path
 ENV PATH $(stack --stack-yaml stack.yaml path --local-install-root):$PATH
+
+
 
 
 # # fetch and make `petsc-hs`

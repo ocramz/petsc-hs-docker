@@ -11,6 +11,6 @@ The PETSc and SLEPc dependencies have been precompiled in a [Debian-based image]
 
 The rationale for this choice is manifold: 
 
-* PETSc is a largeish dependency that takes some 15 minutes to build on a fast machine. We use continuous integration (Travis CI) for testing so anything that cuts down testing time is a good thing (on the other hand, Travis must download a 4.3 GB set of files) so the tradeoff is between computation and bandwidth. So far it seems like computation is slower.
+* PETSc is a large dependency that takes some 15 minutes to build on a fast machine. We use continuous integration (Travis CI) for testing so anything that cuts down testing time is a good thing (on the other hand, Travis must download a 4.3 GB set of files) so the tradeoff is between computation and bandwidth. So far it seems like computation is slower.
 
 * We'd like to have a consistent, or, better still, identical, development/test environment, that works both on a laptop and a compute cluster by construction.
