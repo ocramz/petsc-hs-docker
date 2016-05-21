@@ -81,7 +81,7 @@ WORKDIR $SRC_DIR
 
 RUN stack setup
 
-ADD update-petsc-hs.sh .
+ADD update-petsc-hs.sh $(SRC_DIR)
 RUN ./update-petsc-hs.sh
 
 
