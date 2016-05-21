@@ -72,7 +72,7 @@ ADD update-petsc-hs.sh $SRC_DIR
 
 # # # map `petsc-hs` source dir to container volume
 
-VOLUME $(PETSCHS_DIR)
+
 
 
 # # first repo pull and setup stack
