@@ -79,7 +79,7 @@ ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
 # # fetch and make `petsc-hs`
 WORKDIR $SRC_DIR
 
-ADD update-petsc-hs.sh
+ADD update-petsc-hs.sh .
 RUN ./update-petsc-hs.sh
 
 
