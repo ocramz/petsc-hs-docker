@@ -81,7 +81,7 @@ WORKDIR $PETSCHS_DIR
 
 # # setup + first build of petsc-hs
 RUN stack setup 
-RUN ./stack-build.sh "$STACK_ARGS" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
+RUN ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
 
 WORKDIR $SRC_DIR
