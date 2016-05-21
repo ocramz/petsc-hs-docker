@@ -76,9 +76,7 @@ RUN git clone https://github.com/ocramz/petsc-hs.git
 WORKDIR $PETSCHS_DIR
 RUN stack setup 
 
-ADD update-petsc-hs.sh update-petsc-hs.sh
-RUN ./update-petsc-hs.sh
-
+RUN ./stack-build.sh "$STACK_ARGS" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
 # # run example function
 RUN stack exec petsc-example
