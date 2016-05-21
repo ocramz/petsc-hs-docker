@@ -68,20 +68,21 @@ ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
 
 
 WORKDIR $SRC_DIR
-ADD update-petsc-hs.sh $SRC_DIR
+ADD update-petsc-hs.sh $(SRC_DIR)
 
 # # # map `petsc-hs` source dir to container volume
 
 
 
 
-# # first repo pull and setup stack
+# # 
 RUN git clone https://github.com/ocramz/petsc-hs.git
 WORKDIR $PETSCHS_DIR
 RUN stack setup 
 
 
 WORKDIR $SRC_DIR
+RUN ./stack-build.sh "$STACK_ARGS" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
 # # NB : starting point to fetch and build `petsc-hs` from the github repo
 
@@ -89,7 +90,7 @@ WORKDIR $SRC_DIR
 
 
 
-# RUN ./stack-build.sh "$STACK_ARGS" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
+# 
 
 # # # run example function
 # RUN stack exec petsc-example
