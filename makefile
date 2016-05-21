@@ -25,6 +25,6 @@ login:
 push: build login
 	docker push $(TAG)
 
-run: build
+run:
 	docker run -it --rm $(TAG) /bin/bash -c ./update-petsc-hs.sh
 
