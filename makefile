@@ -11,7 +11,7 @@ help:
 	@echo "  rebuild  '', ignoring previous builds"
 	@echo "  login    login to your docker account"
 	@echo "  push     push the image to the docker registry"
-	@echo "  run      run the image"
+	@echo "  run      build and run the image"
 
 build:
 	docker build -t $(TAG) .
@@ -25,6 +25,6 @@ login:
 push: build login
 	docker push $(TAG)
 
-run: 
-	docker run -it --rm $(TAG)
+run: build
+	docker run -it --rm $(TAG) /bin/bash -c ./update-petsc-hs.sh
 
