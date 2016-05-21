@@ -76,13 +76,13 @@ ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
 
 
 
-# # fetch and make `petsc-hs`
+
 WORKDIR $SRC_DIR
 
-# RUN stack setup
+RUN stack setup
 
+# # fetch and make `petsc-hs`
 ADD update-petsc-hs.sh update-petsc-hs.sh
-
 RUN ./update-petsc-hs.sh
 
 
