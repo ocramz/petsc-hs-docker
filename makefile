@@ -1,12 +1,11 @@
-ACCOUNT = ""
+ACCOUNT = ocramz
 PROJECT = petsc-hs-docker
 TAG = $(ACCOUNT)/$(PROJECT)
 
 .DEFAULT_GOAL := help
 
 help:
-	@echo "Use \`make <target> [ACCOUNT=<accountname>]' where <accountname> is"
-	@echo "your docker account name and <target> is one of"
+	@echo "Use \`make <target> \` where <target> is one of"
 	@echo "  help     display this help message"
 	@echo "  build    build the docker image"
 	@echo "  rebuild  '', ignoring previous builds"
