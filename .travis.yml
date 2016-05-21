@@ -15,4 +15,4 @@ services:
 
 script:
   - make build
-  - make run
+  - make run_travis

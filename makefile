@@ -28,3 +28,6 @@ push: build login
 run:
 	docker run -it --rm $(TAG) /bin/bash -c ./update-petsc-hs.sh
 
+run_travis:
+	docker run -it --rm $(TAG) ./src/update-petsc-hs.sh
+
