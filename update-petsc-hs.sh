@@ -10,7 +10,7 @@ PETSC_ARCH="$PETSC_ARCH"
 SLEPC_ARCH="$SLEPC_ARCH"
 
 # remove previous source + build artifacts
-# rm -rf petsc-hs
+rm -rf petsc-hs
 
 # retrieve latest source
 git clone https://github.com/ocramz/petsc-hs.git
