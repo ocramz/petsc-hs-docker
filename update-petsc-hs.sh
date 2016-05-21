@@ -8,13 +8,13 @@ SLEPC_DIR="$4"
 SLEPC_ARCH="$5"
 
 # # fetch latest version of the library
-git clone https://github.com/ocramz/petsc-hs.git
+# git clone https://github.com/ocramz/petsc-hs.git
 
-cd petsc-hs
+# cd petsc-hs
 
 # # synonym for `stack build ...`
 ./stack-build.sh "$STACK_ARGS" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
-cd ..
+# cd ..
 
 stack path

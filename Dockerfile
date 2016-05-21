@@ -73,6 +73,7 @@ WORKDIR $SRC_DIR
 # # fetch and build `petsc-hs` from the github repo
 RUN git clone https://github.com/ocramz/petsc-hs.git
 
+WORKDIR $PETSCHS_DIR
 RUN stack setup 
 
 ADD update-petsc-hs.sh update-petsc-hs.sh
