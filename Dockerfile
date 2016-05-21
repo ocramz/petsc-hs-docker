@@ -81,8 +81,9 @@ WORKDIR $PETSCHS_DIR
 RUN stack setup 
 
 
-WORKDIR $SRC_DIR
+
 RUN ./stack-build.sh "$STACK_ARGS" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
+WORKDIR $SRC_DIR
 
 # # NB : starting point to fetch and build `petsc-hs` from the github repo
 
