@@ -8,9 +8,10 @@ language:
 services:
   - docker
 
-before_install:
-  - export ACC=ocramz
-
+# # # Caching so the next build will be fast too.
+# cache:
+#   directories:
+#   - $HOME/.stack
 
 script:
-  - make build ACCOUNT=$ACC
+  - make build
