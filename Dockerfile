@@ -69,26 +69,24 @@ RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --s
 # # Add `stack` path
 ENV PATH $(stack --stack-yaml stack.yaml path --local-install-root):$PATH
 
+ENV DIST_DIR $(stack path --dist-dir)/build
+
+ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
+
 
 
 
 # # fetch and make `petsc-hs`
 WORKDIR $SRC_DIR
-RUN git clone https://github.com/ocramz/petsc-hs.git
 
-WORKDIR $PETSCHS_DIR
-# RUN stack build $STACK_ARGS --no-terminal --install-ghc --extra-include-dirs=$PETSC_INCLUDE1 --extra-include-dirs=$PETSC_INCLUDE2 --extra-include-dirs=$SLEPC_INCLUDE1 --extra-include-dirs=$SLEPC_INCLUDE2 --extra-lib-dirs=$PETSC_LIB --extra-lib-dirs=$SLEPC_LIB
-RUN ./stack-build.sh "$STACK_ARGS" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
+ADD update-petsc-hs.sh
+RUN ./update-petsc-hs.sh
 
-RUN stack path
-
-ENV DIST_DIR $(stack path --dist-dir)/build
 
 # # run example function
 RUN stack exec petsc-example
 
 # # ", using mpirun
-ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
 # RUN mpirun -n 2 $DIST_DIR/petsc-example/petsc-example
 
 
