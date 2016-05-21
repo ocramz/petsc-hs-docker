@@ -4,16 +4,6 @@ FROM ocramz/petsc-docker
 RUN apt-get update -yq --fix-missing && apt-get upgrade -y
 
 
-# # RUN sudo apt-get install -f &&
-# RUN apt-get update -yq --fix-missing && apt-get upgrade -y
-# RUN sudo apt-get install software-properties-common
-# RUN sudo add-apt-repository main && \
-#     sudo add-apt-repository universe && \
-#     sudo add-apt-repository restricted && \
-#     sudo add-apt-repository multiverse
-    
-
-
 # TLS-related
 RUN apt-get install -y --no-install-recommends ca-certificates && \
     apt-key update
@@ -79,9 +69,12 @@ ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
 
 WORKDIR $SRC_DIR
 
-RUN stack setup
 
-# # fetch and make `petsc-hs`
+# # fetch and build `petsc-hs` from the github repo
+RUN git clone https://github.com/ocramz/petsc-hs.git
+
+RUN stack setup 
+
 ADD update-petsc-hs.sh update-petsc-hs.sh
 RUN ./update-petsc-hs.sh
 
