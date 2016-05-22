@@ -70,9 +70,9 @@ ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
 
 
 
-# # copy update script (NB: hardcoded dir `/src`)
+
 WORKDIR $SRC_DIR
-ADD update-petsc-hs.sh /src/
+
 
 # # retrieve petsc-hs repository
 RUN git clone https://github.com/ocramz/petsc-hs.git
@@ -86,19 +86,26 @@ RUN ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DI
 
 WORKDIR $SRC_DIR
 
-# # NB : starting point to fetch and build `petsc-hs` from the github repo
+# # copy update script (NB: hardcoded dir `/src`)
+ADD update-petsc-hs.sh /src/
+
+# # <===== NB : starting point to fetch and build `petsc-hs` from the github repo
 
 
 
 
 
-# 
+
 
 # # # run example function
 # RUN stack exec petsc-example
 
 # # # ", using mpirun
 # # RUN mpirun -n 2 $DIST_DIR/petsc-example/petsc-example
+
+
+
+
 
 
 # # # clean temp data
