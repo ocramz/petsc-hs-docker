@@ -86,6 +86,9 @@ RUN ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DI
 
 WORKDIR $SRC_DIR
 
+# # delete PETSc-hs sources and build artifacts (dependencies are compiled in /.stack/ and safe)
+RUN rm -rf petsc-hs/
+
 # # copy update script (NB: hardcoded dir `/src`)
 ADD update-petsc-hs.sh /src/
 

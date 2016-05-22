@@ -3,14 +3,12 @@
 # # NB : PETSc/SLEPc environment variables must be already set at this stage
 # printenv | grep PETSC ..
 
-STACK_ARGS="$STACK_ARGS"
-PETSC_DIR="$PETSC_DIR"
-SLEPC_DIR="$SLEPC_DIR"
-PETSC_ARCH="$PETSC_ARCH"
-SLEPC_ARCH="$SLEPC_ARCH"
+# STACK_ARGS="$STACK_ARGS"
+# PETSC_DIR="$PETSC_DIR"
+# SLEPC_DIR="$SLEPC_DIR"
+# PETSC_ARCH="$PETSC_ARCH"
+# SLEPC_ARCH="$SLEPC_ARCH"
 
-# remove previous source + build artifacts
-rm -rf petsc-hs
 
 # retrieve latest source
 git clone https://github.com/ocramz/petsc-hs.git
