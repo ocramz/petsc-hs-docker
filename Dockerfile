@@ -84,6 +84,14 @@ RUN stack setup
 RUN ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
 
+# # install c2hs
+stack install c2hs
+
+# # generate and interpret c2hs script (architecture-dependent types)
+./c2hs-build.sh ${PETSC_DIR} ${PETSC_ARCH} ${SLEPC_DIR} ${SLEPC_ARCH} ${PWD}/src/Numerical/PETSc/Internal/C2HsGen
+
+
+
 WORKDIR $SRC_DIR
 
 # # delete PETSc-hs sources and build artifacts (dependencies are compiled in /.stack/ and safe)

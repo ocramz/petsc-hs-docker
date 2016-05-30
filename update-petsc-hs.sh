@@ -15,6 +15,8 @@ git clone https://github.com/ocramz/petsc-hs.git
 
 cd petsc-hs
 
+
+
 ./stack-build.sh "$STACK_ARGS" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
 stack exec petsc-example
