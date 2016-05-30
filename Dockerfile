@@ -87,8 +87,15 @@ RUN ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DI
 # # install c2hs
 RUN stack install c2hs
 
+# # where is runhaskell?
+RUN find ${HOME} -name runhaskell
+
+
+
 # # generate and interpret c2hs script (architecture-dependent types)
 RUN ./c2hs-build.sh ${PETSC_DIR} ${PETSC_ARCH} ${SLEPC_DIR} ${SLEPC_ARCH} ${PWD}/src/Numerical/PETSc/Internal/C2HsGen
+
+
 
 
 
