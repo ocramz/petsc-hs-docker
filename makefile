@@ -7,12 +7,15 @@ TAG = $(ACCOUNT)/$(PROJECT)
 help:
 	@echo "Use \`make <target> \` where <target> is one of"
 	@echo "  help     display this help message"
+	@echo "  rbuild   build remotely (on Docker hub)"
 	@echo "  build    build the docker image"
-	@echo "  pull     download a pre-built image from the docker registry"
+	@echo "  pull     download a pre-built image from Docker hub"
 	@echo "  rebuild  '', ignoring previous builds"
-	@echo "  login    login to your docker account"
-	@echo "  push     push the image to the docker registry"
 	@echo "  run      build and run the image"
+
+rbuild:
+	curl -H "Content-Type: application/json" --data '{"build": true}' -X POST https://registry.hub.docker.com/u/ocramz/petsc-hs-docker/trigger/9b1da05d-2ac4-439f-9ffb-443faa37dfcc/
+
 
 build:
 	docker build -t $(TAG) .
