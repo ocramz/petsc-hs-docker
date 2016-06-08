@@ -99,7 +99,6 @@ RUN stack install c2hs
 
 
 
-
 WORKDIR $SRC_DIR
 
 # # delete PETSc-hs sources and build artifacts (dependencies are compiled in /.stack/ and safe)

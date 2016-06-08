@@ -11,7 +11,7 @@
 
 
 # retrieve latest source
-git clone https://github.com/ocramz/petsc-hs.git
+git clone -b petsc-3.7 https://github.com/ocramz/petsc-hs.git
 
 cd petsc-hs
 
