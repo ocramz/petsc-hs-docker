@@ -75,8 +75,10 @@ ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
 WORKDIR $SRC_DIR
 
 
-# # retrieve petsc-hs repository
-RUN git clone https://github.com/ocramz/petsc-hs.git
+# # retrieve petsc-hs repository (NB: branch `petsc-3.7`)
+RUN git clone -b petsc-3.7 https://github.com/ocramz/petsc-hs.git
+
+
 
 WORKDIR $PETSCHS_DIR
 
