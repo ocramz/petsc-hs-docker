@@ -11,17 +11,17 @@ RUN apt-get update -yq --fix-missing && \
 
 # # Set up environment variables
 # # NB : assumes SLEPC_ARCH is defined
-ENV LOCAL_DIR=$HOME/.local
-    BIN_DIR=$HOME/.local/bin
-    SRC_DIR=$HOME/src
-    PETSCHS_DIR=$SRC_DIR/petsc-hs
-    PATH=$BIN_DIR:$PATH
-    PETSC_INCLUDE1=$PETSC_DIR/include/
-    PETSC_INCLUDE2=$PETSC_DIR/$PETSC_ARCH/include/
-    PETSC_LIB=$PETSC_DIR/$PETSC_ARCH/lib/
-    SLEPC_INCLUDE1=$SLEPC_DIR/include/
-    SLEPC_INCLUDE2=$SLEPC_DIR/$SLEPC_ARCH/include/
-    SLEPC_LIB=$SLEPC_DIR/$SLEPC_ARCH/lib/
+ENV LOCAL_DIR = $HOME/.local \
+    BIN_DIR = $HOME/.local/bin \
+    SRC_DIR = $HOME/src \
+    PETSCHS_DIR = $SRC_DIR/petsc-hs \
+    PATH = $BIN_DIR:$PATH \
+    PETSC_INCLUDE1 = $PETSC_DIR/include/ \
+    PETSC_INCLUDE2 = $PETSC_DIR/$PETSC_ARCH/include/ \
+    PETSC_LIB = $PETSC_DIR/$PETSC_ARCH/lib/ \
+    SLEPC_INCLUDE1 = $SLEPC_DIR/include/ \
+    SLEPC_INCLUDE2 = $SLEPC_DIR/$SLEPC_ARCH/include/ \
+    SLEPC_LIB = $SLEPC_DIR/$SLEPC_ARCH/lib/ 
 
 
 # # Create directories
@@ -50,9 +50,9 @@ WORKDIR $BIN_DIR
 RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
 
 # # Add `stack` path
-ENV PATH=$(stack --stack-yaml stack.yaml path --local-install-root):$PATH
-    DIST_DIR=$(stack path --dist-dir)/build
-    PATH=$PETSC_DIR/$PETSC_ARCH/bin/:$PATH
+ENV PATH = $(stack --stack-yaml stack.yaml path --local-install-root):$PATH \
+    DIST_DIR = $(stack path --dist-dir)/build \
+    PATH = $PETSC_DIR/$PETSC_ARCH/bin/:$PATH \
 
 
 
@@ -110,13 +110,3 @@ ADD update-petsc-hs.sh /src/
 
 # # # ", using mpirun
 # # RUN mpirun -n 2 $DIST_DIR/petsc-example/petsc-example
-
-
-
-
-
-
-# # # clean temp data
-RUN apt-get clean && \
-    apt-get purge && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
