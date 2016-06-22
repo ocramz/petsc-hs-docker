@@ -9,23 +9,18 @@ RUN apt-get update -yq --fix-missing && \
 
 
 # # Set up environment variables
-ENV LOCAL_DIR $HOME/.local
-ENV BIN_DIR $HOME/.local/bin
-ENV SRC_DIR $HOME/src
-ENV PETSCHS_DIR $SRC_DIR/petsc-hs
-
-
-ENV PATH $BIN_DIR:$PATH
-
-ENV PETSC_INCLUDE1 $PETSC_DIR/include/
-ENV PETSC_INCLUDE2 $PETSC_DIR/$PETSC_ARCH/include/
-ENV PETSC_LIB $PETSC_DIR/$PETSC_ARCH/lib/
-
-
 # # NB : assumes SLEPC_ARCH is defined
-ENV SLEPC_INCLUDE1 $SLEPC_DIR/include/
-ENV SLEPC_INCLUDE2 $SLEPC_DIR/$SLEPC_ARCH/include/
-ENV SLEPC_LIB $SLEPC_DIR/$SLEPC_ARCH/lib/
+ENV LOCAL_DIR=$HOME/.local
+    BIN_DIR=$HOME/.local/bin
+    SRC_DIR=$HOME/src
+    PETSCHS_DIR=$SRC_DIR/petsc-hs
+    PATH=$BIN_DIR:$PATH
+    PETSC_INCLUDE1=$PETSC_DIR/include/
+    PETSC_INCLUDE2=$PETSC_DIR/$PETSC_ARCH/include/
+    PETSC_LIB=$PETSC_DIR/$PETSC_ARCH/lib/
+    SLEPC_INCLUDE1=$SLEPC_DIR/include/
+    SLEPC_INCLUDE2=$SLEPC_DIR/$SLEPC_ARCH/include/
+    SLEPC_LIB=$SLEPC_DIR/$SLEPC_ARCH/lib/
 
 
 # # Create directories
@@ -34,15 +29,15 @@ RUN mkdir -p $LOCAL_DIR && \
     mkdir -p $SRC_DIR
 
 # # print PETSc/SLEPc env variables to stdout:
-RUN echo $PETSC_DIR 
-RUN echo $PETSC_ARCH 
-RUN echo $SLEPC_DIR 
-RUN echo $SLEPC_ARCH 
-RUN echo $PETSC_LIB 
-RUN echo $SLEPC_LIB 
-RUN echo $LD_LIBRARY_PATH 
-RUN echo $PKG_CONFIG_PATH
-RUN printenv | grep bin
+RUN echo $PETSC_DIR && \
+    echo $PETSC_ARCH && \
+    echo $SLEPC_DIR && \
+    echo $SLEPC_ARCH && \
+    echo $PETSC_LIB && \
+    echo $SLEPC_LIB && \
+    echo $LD_LIBRARY_PATH && \
+    echo $PKG_CONFIG_PATH && \
+    printenv | grep bin
 
 
 
@@ -54,11 +49,9 @@ WORKDIR $BIN_DIR
 RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
 
 # # Add `stack` path
-ENV PATH $(stack --stack-yaml stack.yaml path --local-install-root):$PATH
-
-ENV DIST_DIR $(stack path --dist-dir)/build
-
-ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
+ENV PATH=$(stack --stack-yaml stack.yaml path --local-install-root):$PATH
+    DIST_DIR=$(stack path --dist-dir)/build
+    PATH=$PETSC_DIR/$PETSC_ARCH/bin/:$PATH
 
 
 
