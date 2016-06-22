@@ -2,10 +2,11 @@ FROM ocramz/petsc-docker:petsc-3.7.2
 
 # # Update APT
 RUN apt-get update -yq --fix-missing && \
-    apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends ca-certificates && \
     apt-key update && \
-    apt-get install -yq make gcc git libgmp-dev wget curl xz-utils
+    apt-get install -y --no-install-recommends ca-certificates make gcc git libgmp-dev wget curl xz-utils && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    apt-get clean && \
+    apt-get purge && \
 
 
 # # Set up environment variables
@@ -116,4 +117,6 @@ ADD update-petsc-hs.sh /src/
 
 
 # # # clean temp data
-RUN sudo apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && \
+    apt-get purge && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
