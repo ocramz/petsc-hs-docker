@@ -1,12 +1,11 @@
 FROM ocramz/petsc-docker:petsc-3.7.2
 
 # # Update APT
-RUN apt-get update -yq --fix-missing && apt-get upgrade -y
-
-
-# TLS-related
-RUN apt-get install -y --no-install-recommends ca-certificates && \
-    apt-key update
+RUN apt-get update -yq --fix-missing && \
+    apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends ca-certificates && \
+    apt-key update && \
+    apt-get install -yq make gcc git libgmp-dev wget curl xz-utils
 
 
 # # Set up environment variables
@@ -47,9 +46,6 @@ RUN printenv | grep bin
 
 
 
-# # Get build tools
-RUN apt-get install -yq make gcc git libgmp-dev wget curl xz-utils
-
 
 
 # # Get `stack`
@@ -83,8 +79,8 @@ RUN git clone -b petsc-3.7 https://github.com/ocramz/petsc-hs.git
 WORKDIR $PETSCHS_DIR
 
 # # setup + first build of petsc-hs
-RUN stack setup 
-RUN ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
+RUN stack setup && \
+    ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
 
 # # install c2hs
