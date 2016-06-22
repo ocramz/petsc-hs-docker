@@ -31,9 +31,9 @@ RUN ./environment.sh
 RUN printenv
 
 # # Create directories
-RUN mkdir -p "$BIN_DIR" && \
-    mkdir -p "$SRC_DIR" && \
-    mkdir -p "$LOCAL_DIR"
+RUN mkdir -p "$BIN_DIR" 
+RUN mkdir -p "$SRC_DIR"
+RUN mkdir -p "$LOCAL_DIR"
 
 # # print PETSc/SLEPc env variables to stdout:
 RUN echo $PETSC_DIR && \
