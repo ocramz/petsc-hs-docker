@@ -31,7 +31,6 @@ RUN ./environment.sh
 RUN printenv
 
 # # Create directories
-RUN mkdir -p $LOCAL_DIR
 RUN mkdir -p $BIN_DIR
 RUN mkdir -p $SRC_DIR
 
