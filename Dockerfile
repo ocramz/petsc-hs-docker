@@ -25,7 +25,7 @@ RUN apt-get update -yq --fix-missing && \
 
 # add environment variables
 WORKDIR $HOME
-ADD environment.sh $HOME
+COPY environment.sh $HOME
 RUN ./environment.sh
 
 RUN printenv
