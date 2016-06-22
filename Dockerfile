@@ -11,9 +11,9 @@ RUN apt-get update -yq --fix-missing && \
 
 # # Set up environment variables
 # # NB : assumes SLEPC_ARCH is defined
-ENV LOCAL_DIR=$HOME/.local \
-    BIN_DIR=$HOME/.local/bin \
-    SRC_DIR=$HOME/src \
+ENV LOCAL_DIR=${HOME}/.local \
+    BIN_DIR=${HOME}/.local/bin \
+    SRC_DIR=${HOME}/src \
     PETSCHS_DIR=$SRC_DIR/petsc-hs \
     PETSC_INCLUDE1=$PETSC_DIR/include/ \
     PETSC_INCLUDE2=$PETSC_DIR/$PETSC_ARCH/include/ \
@@ -70,7 +70,7 @@ RUN git clone -b petsc-3.7 https://github.com/ocramz/petsc-hs.git
 
 
 
-WORKDIR $PETSCHS_DIR
+WORKDIR ${SRC_DIR}/petsc-hs
 
 # # setup + first build of petsc-hs
 RUN stack setup && \
