@@ -6,7 +6,7 @@ RUN apt-get update -yq --fix-missing && \
     apt-get install -y --no-install-recommends ca-certificates make gcc git libgmp-dev wget curl xz-utils && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     apt-get clean && \
-    apt-get purge && \
+    apt-get purge 
 
 
 # # Set up environment variables
