@@ -9,20 +9,26 @@ RUN apt-get update -yq --fix-missing && \
     apt-get purge 
 
 
-# # Set up environment variables
-# # NB : assumes SLEPC_ARCH is defined
-ENV LOCAL_DIR = $HOME/.local \
-    BIN_DIR = $HOME/.local/bin \
-    SRC_DIR = $HOME/src \
-    PETSCHS_DIR = $SRC_DIR/petsc-hs \
-    PATH = $BIN_DIR:$PATH \
-    PETSC_INCLUDE1 = $PETSC_DIR/include/ \
-    PETSC_INCLUDE2 = $PETSC_DIR/$PETSC_ARCH/include/ \
-    PETSC_LIB = $PETSC_DIR/$PETSC_ARCH/lib/ \
-    SLEPC_INCLUDE1 = $SLEPC_DIR/include/ \
-    SLEPC_INCLUDE2 = $SLEPC_DIR/$SLEPC_ARCH/include/ \
-    SLEPC_LIB = $SLEPC_DIR/$SLEPC_ARCH/lib/ 
+# # # Set up environment variables
+# # # NB : assumes SLEPC_ARCH is defined
+# ENV LOCAL_DIR = $HOME/.local \
+#     BIN_DIR = $HOME/.local/bin \
+#     SRC_DIR = $HOME/src \
+#     PETSCHS_DIR = $SRC_DIR/petsc-hs \
+#     PATH = $BIN_DIR:$PATH \
+#     PETSC_INCLUDE1 = $PETSC_DIR/include/ \
+#     PETSC_INCLUDE2 = $PETSC_DIR/$PETSC_ARCH/include/ \
+#     PETSC_LIB = $PETSC_DIR/$PETSC_ARCH/lib/ \
+#     SLEPC_INCLUDE1 = $SLEPC_DIR/include/ \
+#     SLEPC_INCLUDE2 = $SLEPC_DIR/$SLEPC_ARCH/include/ \
+#     SLEPC_LIB = $SLEPC_DIR/$SLEPC_ARCH/lib/ 
 
+# add environment variables
+WORKDIR $HOME
+ADD environment.sh $HOME
+RUN ./environment.sh
+
+RUN printenv
 
 # # Create directories
 RUN mkdir -p $LOCAL_DIR && \
