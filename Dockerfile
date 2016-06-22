@@ -29,9 +29,9 @@ ENV SLEPC_LIB $SLEPC_DIR/$SLEPC_ARCH/lib/
 
 
 # # Create directories
-RUN mkdir -p $LOCAL_DIR
-RUN mkdir -p $BIN_DIR
-RUN mkdir -p $SRC_DIR
+RUN mkdir -p $LOCAL_DIR && \
+    mkdir -p $BIN_DIR && \
+    mkdir -p $SRC_DIR
 
 # # print PETSc/SLEPc env variables to stdout:
 RUN echo $PETSC_DIR 
