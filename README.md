@@ -4,27 +4,18 @@ Travis CI: [![Build Status](https://travis-ci.org/ocramz/petsc-hs-docker.svg?bra
 
 A Docker-based installation of [petsc-hs](http://github.com/ocramz/petsc-hs).
 
-Info
-----
+## Info
+
 
 The PETSc and SLEPc libraries have been precompiled in a [Ubuntu-based image](https://hub.docker.com/r/ocramz/petsc-docker/), and `petsc-hs-docker` builds upon it.
 
 PETSc is a large dependency that takes some 15 minutes to build on a fast machine. Moreover, a new version is released once every year, making it an approximately static target to develop against. 
 
 
-Options
--------
+## Usage
 
-Use `make <target>` where `<target>` is one of
+0. (make sure Docker is installed, preferably at the latest version, and if running on OSX or Windows a `docker-machine` VM should be up and running)
 
-    help     display this help message
+1. Download the image with `docker pull ocramz/petsc-hs-docker`
 
-    rbuild   build remotely (on Docker hub)
-
-    build    build the docker image
-
-    pull     fetch precompiled image from Docker hub
-
-    rebuild  '', ignoring previous builds
-
-    run      build and run the image on the local machine
+2. Run the image with `docker run -it --rm ocramz/petsc-hs-docker /bin/bash` and, at its prompt, build the latest version of `petsc-hs` with  `./update-petsc-hs.sh`. This will run the examples and leave the image open for experimentation.
