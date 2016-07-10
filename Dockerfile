@@ -58,9 +58,11 @@ WORKDIR $BIN_DIR
 RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
 
 # # Add `stack` path
-ENV PATH $(stack --stack-yaml stack.yaml path --local-install-root):$PATH
 
-ENV DIST_DIR $(stack path --dist-dir)/build
+RUN export STACK_PATH_1=$(stack --stack-yaml stack.yaml path --local-install-root)
+ENV PATH STACK_PATH_1:$PATH
+
+RUN export DIST_DIR_1=$(stack path --dist-dir)/build
 
 ENV PATH $PETSC_DIR/$PETSC_ARCH/bin/:$PATH
 

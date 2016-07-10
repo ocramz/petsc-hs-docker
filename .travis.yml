@@ -13,6 +13,7 @@ services:
 #   directories:
 #   - $HOME/.stack
 
+
 script:
   - make build
   - make run_travis
