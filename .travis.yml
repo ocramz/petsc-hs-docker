@@ -17,3 +17,4 @@ services:
 script:
   - make build
   - make run_travis
+  - docker images
