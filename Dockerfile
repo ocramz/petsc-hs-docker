@@ -45,7 +45,6 @@ RUN echo $PETSC_LIB
 RUN echo $SLEPC_LIB 
 RUN echo $LD_LIBRARY_PATH 
 RUN echo $PKG_CONFIG_PATH
-RUN printenv | grep bin
 
 
 
