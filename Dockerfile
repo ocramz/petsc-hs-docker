@@ -1,4 +1,6 @@
-FROM ocramz/petsc-docker:petsc-3.7.2
+# FROM ocramz/petsc-docker:petsc-3.7.2
+# July 11, 2016 : petsc-docker master builds PETSc 3.7
+FROM ocramz/petsc-docker 
 
 # # Update APT
 RUN apt-get update -yq --fix-missing && apt-get upgrade -y
