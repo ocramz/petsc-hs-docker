@@ -1,6 +1,3 @@
-# FROM ocramz/petsc-docker:petsc-3.7.2
-# July 11, 2016 : petsc-docker master builds PETSc 3.7
-# FROM ocramz/petsc-docker
 FROM ocramz/petsc-hs-docker-stage0
 
 # # Update APT
@@ -38,10 +35,9 @@ ENV PATH=${MPIRUN_PATH}:${PATH}
 # ------------------------------------------------------------
 # petsc-hs : install c2hs and build dependencies
 # ------------------------------------------------------------
-# # install c2hs
-RUN stack install c2hs
 
-RUN ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
+RUN stack install c2hs  && \
+    ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
 
 
