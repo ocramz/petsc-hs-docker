@@ -72,9 +72,6 @@ ENV PATH ${PETSC_DIR}/${PETSC_ARCH}/bin/:${PATH}
 
 
 
-
-
-
 WORKDIR $SRC_DIR
 
 
