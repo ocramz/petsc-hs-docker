@@ -1,72 +1,20 @@
 # FROM ocramz/petsc-docker:petsc-3.7.2
 # July 11, 2016 : petsc-docker master builds PETSc 3.7
-FROM ocramz/petsc-docker 
+# FROM ocramz/petsc-docker
+FROM ocramz/petsc-hs-docker-stage0
 
 # # Update APT
-RUN apt-get update -yq --fix-missing && \
-    apt-get install -yq --no-install-recommends \
-                           make gcc git libgmp-dev wget curl xz-utils
+# RUN apt-get update -yq --fix-missing && \
+#     apt-get install -yq --no-install-recommends \
+#                            make gcc git libgmp-dev wget curl xz-utils
 
 
-# # Set up environment variables
-ENV LOCAL_DIR $HOME/.local
-ENV BIN_DIR $HOME/.local/bin
-ENV SRC_DIR $HOME/src
-ENV PETSCHS_DIR $SRC_DIR/petsc-hs
+RUN printenv
 
-
-ENV PATH $BIN_DIR:$PATH
-
-ENV PETSC_INCLUDE1 $PETSC_DIR/include/
-ENV PETSC_INCLUDE2 $PETSC_DIR/$PETSC_ARCH/include/
-ENV PETSC_LIB $PETSC_DIR/$PETSC_ARCH/lib/
-
-
-# # NB : assumes SLEPC_ARCH is defined
-ENV SLEPC_INCLUDE1 $SLEPC_DIR/include/
-ENV SLEPC_INCLUDE2 $SLEPC_DIR/$SLEPC_ARCH/include/
-ENV SLEPC_LIB $SLEPC_DIR/$SLEPC_ARCH/lib/
-
-
-# # Create directories
-RUN mkdir -p $LOCAL_DIR
-RUN mkdir -p $BIN_DIR
-RUN mkdir -p $SRC_DIR
-
-# # print PETSc/SLEPc env variables to stdout:
-RUN echo $PETSC_DIR 
-RUN echo $PETSC_ARCH 
-RUN echo $SLEPC_DIR 
-RUN echo $SLEPC_ARCH 
-RUN echo $PETSC_LIB 
-RUN echo $SLEPC_LIB 
-RUN echo $LD_LIBRARY_PATH 
-RUN echo $PKG_CONFIG_PATH
-
-
-
-
-# # Get `stack`
-WORKDIR $BIN_DIR
-
-RUN curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C $BIN_DIR '*/stack'
-
-# # Add `stack` path
-
-RUN export STACK_PATH_1=$(stack --stack-yaml stack.yaml path --local-install-root)
-ENV PATH ${STACK_PATH_1}:${PATH}
-
-RUN export DIST_DIR_1=$(stack path --dist-dir)/build
-
-ENV PATH ${PETSC_DIR}/${PETSC_ARCH}/bin/:${PATH}
-
-
-
-
-
-
+# ------------------------------------------------------------
+# petsc-hs : clone repository and `stack setup`
+# ------------------------------------------------------------
 WORKDIR $SRC_DIR
-
 
 # # retrieve petsc-hs repository
 RUN git clone https://github.com/ocramz/petsc-hs.git
@@ -74,15 +22,26 @@ RUN git clone https://github.com/ocramz/petsc-hs.git
 WORKDIR $PETSCHS_DIR
 
 # # setup + first build of petsc-hs
-RUN stack setup 
-RUN ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
+RUN stack setup
+
+# expand Stack-related path variables
+RUN export STACK_PATH_1=$(stack --stack-yaml stack.yaml path --local-install-root) && \
+    export DIST_DIR_1=$(stack path --dist-dir)/build
+
+ENV PATH=${PETSC_DIR}/${PETSC_ARCH}/bin/:$PATH \
+    PATH=${STACK_PATH_1}:${PATH} \
+    MPIRUN_PATH=${PETSC_DIR}/${PETSC_ARCH}/bin
+
+ENV PATH=${MPIRUN_PATH}:${PATH}
 
 
+# ------------------------------------------------------------
+# petsc-hs : install c2hs and build dependencies
+# ------------------------------------------------------------
 # # install c2hs
 RUN stack install c2hs
 
-# # # where is runhaskell?
-# RUN find ${HOME} -name runhaskell
+RUN ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
 
 
@@ -113,10 +72,3 @@ ADD update-petsc-hs.sh /src/
 # # # ", using mpirun
 # # RUN mpirun -n 2 $DIST_DIR/petsc-example/petsc-example
 
-
-
-
-
-
-# # # clean temp data
-RUN sudo apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
