@@ -3,7 +3,9 @@
 FROM ocramz/petsc-docker 
 
 # # Update APT
-RUN apt-get update -yq --fix-missing
+RUN apt-get update -yq --fix-missing && \
+    apt-get install -yq --no-install-recommends \
+                           make gcc git libgmp-dev wget curl xz-utils
 
 
 # # Set up environment variables
@@ -41,10 +43,6 @@ RUN echo $SLEPC_LIB
 RUN echo $LD_LIBRARY_PATH 
 RUN echo $PKG_CONFIG_PATH
 
-
-
-# # Get build tools
-RUN apt-get install -yq make gcc git libgmp-dev wget curl xz-utils
 
 
 
