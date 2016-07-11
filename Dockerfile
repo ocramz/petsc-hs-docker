@@ -3,12 +3,7 @@
 FROM ocramz/petsc-docker 
 
 # # Update APT
-RUN apt-get update -yq --fix-missing && apt-get upgrade -y
-
-
-# TLS-related
-RUN apt-get install -y --no-install-recommends ca-certificates && \
-    apt-key update
+RUN apt-get update -yq --fix-missing
 
 
 # # Set up environment variables
