@@ -5,8 +5,8 @@ FROM ocramz/petsc-hs-docker-stage0
 #     apt-get install -yq --no-install-recommends \
 #                            make gcc git libgmp-dev wget curl xz-utils
 
-ENV PATH=${PETSC_DIR}/${PETSC_ARCH}/lib/:$PATH \
-    PATH=${SLEPC_DIR}/${SLEPC_ARCH}/lib/:$PATH
+ENV PATH=${PETSC_DIR}/${PETSC_ARCH}/lib/:$PATH
+ENV PATH=${SLEPC_DIR}/${SLEPC_ARCH}/lib/:$PATH
 
 # ------------------------------------------------------------
 # SHOW ENVIRONMENT
