@@ -5,8 +5,18 @@ FROM ocramz/petsc-hs-docker-stage0
 #     apt-get install -yq --no-install-recommends \
 #                            make gcc git libgmp-dev wget curl xz-utils
 
+ENV PATH=${PETSC_DIR}/${PETSC_ARCH}/lib/:$PATH \
+    PATH=${SLEPC_DIR}/${SLEPC_ARCH}/lib/:$PATH
 
+# ------------------------------------------------------------
+# SHOW ENVIRONMENT
+# ------------------------------------------------------------
 RUN printenv
+
+# ------------------------------------------------------------
+# SHOW PETSC CONFIGURE OPTIONS
+# ------------------------------------------------------------
+RUN cat ${PETSC_DIR}/${PETSC_ARCH}/lib/petsc/conf/configure.log | grep "Configure Options"
 
 # ------------------------------------------------------------
 # petsc-hs : clone repository and `stack setup`
