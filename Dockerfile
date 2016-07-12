@@ -51,14 +51,12 @@ RUN stack install c2hs  && \
 
 
 
-
-
-
-
+# ------------------------------------------------------------
+# petsc-hs : delete PETSc-hs sources and build artifacts (dependencies are compiled in /.stack/ and safe)
+# ------------------------------------------------------------
 
 WORKDIR $SRC_DIR
 
-# # delete PETSc-hs sources and build artifacts (dependencies are compiled in /.stack/ and safe)
 RUN rm -rf petsc-hs/
 
 # # copy update script (NB: hardcoded dir `/src`)
