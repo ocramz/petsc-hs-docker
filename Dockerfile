@@ -50,7 +50,6 @@ RUN stack install c2hs  && \
     ./stack-build.sh "--dependencies-only" "$PETSC_DIR" "$PETSC_ARCH" "$SLEPC_DIR" "$SLEPC_ARCH"
 
 
-
 # ------------------------------------------------------------
 # petsc-hs : delete PETSc-hs sources and build artifacts (dependencies are compiled in /.stack/ and safe)
 # ------------------------------------------------------------
