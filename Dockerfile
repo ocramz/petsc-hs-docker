@@ -4,6 +4,8 @@ FROM ocramz/petsc-hs-docker-stage0
 # RUN apt-get update -yq --fix-missing && \
 #     apt-get install -yq --no-install-recommends \
 #                            make gcc git libgmp-dev wget curl xz-utils
+RUN apt-get update -yq --fix-missing &&\
+    apt-get install -yq --no-install-recommends openssl
 
 ENV PATH=${PETSC_DIR}/${PETSC_ARCH}/lib/:$PATH
 ENV PATH=${SLEPC_DIR}/${SLEPC_ARCH}/lib/:$PATH
