@@ -26,6 +26,7 @@ WORKDIR $SRC_DIR
 # # retrieve petsc-hs repository
 RUN git clone https://github.com/ocramz/petsc-hs.git
 
+# # NB: assumes $PETSCHS_DIR is in $SRC_DIR
 WORKDIR $PETSCHS_DIR
 
 # # setup + first build of petsc-hs
