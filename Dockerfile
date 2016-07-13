@@ -8,15 +8,15 @@ FROM ocramz/petsc-hs-docker-stage0
 ENV PATH=${PETSC_DIR}/${PETSC_ARCH}/lib/:$PATH
 ENV PATH=${SLEPC_DIR}/${SLEPC_ARCH}/lib/:$PATH
 
-# ------------------------------------------------------------
-# SHOW ENVIRONMENT
-# ------------------------------------------------------------
-RUN printenv
+# # ------------------------------------------------------------
+# # SHOW ENVIRONMENT
+# # ------------------------------------------------------------
+# RUN printenv
 
-# ------------------------------------------------------------
-# SHOW PETSC CONFIGURE OPTIONS
-# ------------------------------------------------------------
-RUN cat ${PETSC_DIR}/${PETSC_ARCH}/lib/petsc/conf/configure.log | grep "Configure Options"
+# # ------------------------------------------------------------
+# # SHOW PETSC CONFIGURE OPTIONS
+# # ------------------------------------------------------------
+# RUN cat ${PETSC_DIR}/${PETSC_ARCH}/lib/petsc/conf/configure.log | grep "Configure Options"
 
 # ------------------------------------------------------------
 # petsc-hs : clone repository and `stack setup`
